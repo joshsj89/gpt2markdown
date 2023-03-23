@@ -33,9 +33,6 @@ new MutationObserver(() => {
     subtree: true
 })
 
-let lastEle = bottom.lastElementChild;
-lastEle.appendChild(footer);
-
 function handleClick() {
     if (document.querySelector(".pr-14.bg-gray-800")?.innerText === undefined) return
     handleLiveChat()
