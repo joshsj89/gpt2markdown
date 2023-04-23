@@ -13,7 +13,7 @@ expoButton.innerHTML = `
     </svg></span>
     <span>GPT 2 Markdown</span>
     `;
-inputActionNode = document.querySelector("div[class*='relative flex h-full flex-1 md:flex-col']");
+inputActionNode = document.querySelector("div[class*='relative flex h-full flex-1 items-stretch md:flex-col']");
 inputActionNode.appendChild(expoButton)
 expoButton.addEventListener('click', handleClick);
 expoButton.addEventListener('load', () => console.log(document.querySelector(".pr-14.bg-gray-800")?.innerText))
