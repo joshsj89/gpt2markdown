@@ -59,7 +59,7 @@ function handleStore() {
             </svg></span>
             <span>GPT 2 Markdown</span>
     `;
-        inputActionNode = document.querySelector("div[class*='relative flex h-full flex-1 md:flex-col']");
+        inputActionNode = document.querySelector("div[class*='relative flex h-full flex-1 items-stretch md:flex-col']");
         inputActionNode.appendChild(expoButton)
         expoButton.addEventListener('click', handleClick);
     }
