@@ -40,7 +40,7 @@ function handleClick() {
     const o = document.createElement("a");
     let d = new Date()
     date = d.toISOString()
-    o.download = (`${date} • ${document.querySelector(".pr-14.bg-gray-800")?.innerText}` || "Conversation with ChatGPT") + ".md", o.href = URL.createObjectURL(new Blob([t])), o.style.display = "none", document.body.appendChild(o), o.click()
+    o.download = (`${document.querySelector(".pr-14.bg-gray-800")?.innerText} - ${date}` || "Conversation with ChatGPT") + ".md", o.href = URL.createObjectURL(new Blob([t])), o.style.display = "none", document.body.appendChild(o), o.click()
 }
 
 function handleStore() {
