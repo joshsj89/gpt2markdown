@@ -1,6 +1,5 @@
 // start
 const rootEle = document.querySelector('div[id="__next"]');
-let innerText = document.querySelector('a[class="flex py-3 px-3 items-center gap-3 relative rounded-md cursor-pointer break-all pr-14 bg-gray-800 hover:bg-gray-800 group"]')?.innerText;
 
 let expoButton = document.createElement('button');
 
@@ -13,10 +12,19 @@ expoButton.innerHTML = `
     </svg></span>
     <span>GPT 2 Markdown</span>
     `;
-inputActionNode = document.querySelector("div[class*='relative flex h-full flex-1 items-stretch md:flex-col']");
-inputActionNode.appendChild(expoButton)
-expoButton.addEventListener('click', handleClick);
-expoButton.addEventListener('load', () => console.log(document.querySelector(".pr-14.bg-gray-800")?.innerText))
+
+const inputActionNodeDiv = "div[class*='relative flex h-full flex-1 items-stretch md:flex-col']";
+let inputActionNode;
+
+// wait until the inputActionNodeDiv is loaded
+const interval = setInterval(() => {
+    inputActionNode = document.querySelector(inputActionNodeDiv);
+    if (inputActionNode) {
+        clearInterval(interval);
+        inputActionNode.appendChild(expoButton)
+        expoButton.addEventListener('click', handleClick);
+    }
+});
 
 new MutationObserver(() => {
     handleStore();
@@ -26,7 +34,7 @@ new MutationObserver(() => {
 })
 
 function handleClick() {
-    if (document.querySelector(".pr-14.bg-gray-800")?.innerText === undefined) return
+    if (document.title == undefined) return
     
     const e = document.querySelectorAll(".text-base");
     let t = "";
@@ -34,13 +42,14 @@ function handleClick() {
         if (s.querySelector('.whitespace-pre-wrap')) {
 
             let innerHtml = s.querySelector(".whitespace-pre-wrap").innerHTML;
-            t += `${htmlToMarkdown(s.querySelectorAll('img').length > 1 ? `**You:**` : `**ChatGPT:**`)}\n${htmlToMarkdown(innerHtml)}\n\n --------\n`
+            t += `${htmlToMarkdown(s.querySelectorAll('img').length > 0 ? `**You:**` : `**ChatGPT:**`)}\n${htmlToMarkdown(innerHtml)}\n\n --------\n`
         }
     }
     const o = document.createElement("a");
-    let d = new Date()
-    date = d.toISOString()
-    o.download = (`${document.querySelector(".pr-14.bg-gray-800")?.innerText} - ${date}` || "Conversation with ChatGPT") + ".md", o.href = URL.createObjectURL(new Blob([t])), o.style.display = "none", document.body.appendChild(o), o.click()
+    let d = new Date();
+    date = d.toISOString();
+    o.download = (`${document.title} - ${date}` || "Conversation with ChatGPT") + ".md", o.href = URL.createObjectURL(new Blob([t])), o.style.display = "none", document.body.appendChild(o), o.click();
+    o.remove();
 }
 
 function handleStore() {
