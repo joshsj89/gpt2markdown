@@ -26,6 +26,14 @@ const interval = setInterval(() => {
     }
 });
 
+const handleLiveChat = () => {
+    setTimeout(() => {
+        chatText = document.querySelector(".pr-14.bg-gray-800")?.innerText
+        if (chatText) console.log('exist!')
+        console.log('not exist!')
+    }, 500);
+}
+
 new MutationObserver(() => {
     handleStore();
 }).observe(rootEle, {
